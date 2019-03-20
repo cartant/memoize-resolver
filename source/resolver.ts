@@ -4,9 +4,8 @@
  */
 
 export function resolver(
-    selector?: (args: unknown[]) => unknown[]
+    selector: (args: unknown[]) => unknown[] = args => args
 ): (...args: unknown[]) => string {
-    selector = selector || (args => args);
     let lastId = 0;
     const map = new WeakMap<object, number>();
     return (...args) => args.map(arg => {
