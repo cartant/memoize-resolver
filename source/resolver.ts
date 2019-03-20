@@ -7,13 +7,13 @@ export function resolver(
     selector?: (args: unknown[]) => unknown[]
 ): (...args: unknown[]) => string {
     selector = selector || (args => args);
-    let id = 0;
+    let lastId = 0;
     const map = new WeakMap<object, number>();
     return (...args) => args.map(arg => {
         if (arg && /^(function|object)$/.test(typeof arg)) {
             let argId = map.get(arg as object);
             if (!argId) {
-                argId = ++id;
+                argId = ++lastId;
                 map.set(arg as object, argId);
             }
             return `@${argId}`;
