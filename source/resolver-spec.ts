@@ -70,7 +70,10 @@ describe("createResolver", () => {
         const c = { value: a };
         const d = { value: a };
         const e = { value: b };
-        const resolver = createResolver(([arg]) => [(arg as any)["value"]]);
+        type C = typeof c;
+        type D = typeof d;
+        type E = typeof e;
+        const resolver = createResolver((arg: C | D | E) => [arg.value]);
         expect(resolver(c)).to.equal(resolver(d));
         expect(resolver(c)).to.not.equal(resolver(e));
     });

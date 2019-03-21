@@ -4,11 +4,11 @@
  */
 
 export function createResolver(
-    selector: (args: unknown[]) => unknown[] = args => args
-): (...args: unknown[]) => string {
+    selector: (...args: any[]) => unknown[] = (...args) => args
+): (...args: any[]) => string {
     let lastId = 0;
     const map = new WeakMap<object, number>();
-    return (...args) => selector(args).map(arg => {
+    return (...args) => selector(...args).map(arg => {
         if (arg && /^(function|object)$/.test(typeof arg)) {
             let argId = map.get(arg as object);
             if (!argId) {
