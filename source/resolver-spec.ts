@@ -77,4 +77,20 @@ describe("createResolver", () => {
         expect(resolver(c)).to.equal(resolver(d));
         expect(resolver(c)).to.not.equal(resolver(e));
     });
+
+    it("should support a multi-parameter selector", () => {
+        const a = {};
+        const b = {};
+        const c = { value: a };
+        const d = { value: a };
+        const e = { value: b };
+        const f = {};
+        type C = typeof c;
+        type D = typeof d;
+        type E = typeof e;
+        type F = typeof f;
+        const resolver = createResolver((i: C | D | E, j: F) => [i.value, j]);
+        expect(resolver(c, f)).to.equal(resolver(d, f));
+        expect(resolver(c, f)).to.not.equal(resolver(e, f));
+    });
 });
