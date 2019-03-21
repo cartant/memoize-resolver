@@ -3,12 +3,12 @@
  * can be found in the LICENSE file at https://github.com/cartant/memoize-resolver
  */
 
-export function resolver(
+export function createResolver(
     selector: (args: unknown[]) => unknown[] = args => args
 ): (...args: unknown[]) => string {
     let lastId = 0;
     const map = new WeakMap<object, number>();
-    return (...args) => args.map(arg => {
+    return (...args) => selector(args).map(arg => {
         if (arg && /^(function|object)$/.test(typeof arg)) {
             let argId = map.get(arg as object);
             if (!argId) {
