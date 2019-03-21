@@ -65,8 +65,8 @@ describe("createResolver", () => {
     });
 
     it("should support a selector", () => {
-        const a = {};
-        const b = {};
+        const a = { a: "a" as "a" };
+        const b = { b: "b" as "b" };
         const c = { value: a };
         const d = { value: a };
         const e = { value: b };
@@ -79,12 +79,12 @@ describe("createResolver", () => {
     });
 
     it("should support a multi-parameter selector", () => {
-        const a = {};
-        const b = {};
+        const a = { a: "a" as "a" };
+        const b = { b: "b" as "b" };
         const c = { value: a };
         const d = { value: a };
         const e = { value: b };
-        const f = {};
+        const f = { f: "f" as "f" };
         type C = typeof c;
         type D = typeof d;
         type E = typeof e;

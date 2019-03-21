@@ -3,9 +3,9 @@
  * can be found in the LICENSE file at https://github.com/cartant/memoize-resolver
  */
 
-export function createResolver(
-    selector: (...args: any[]) => unknown[] = (...args) => args
-): (...args: any[]) => string {
+export function createResolver<Args extends any[]>(
+    selector: (...args: Args) => unknown[] = (...args) => args
+): (...args: Args) => string {
     let lastId = 0;
     const map = new WeakMap<object, number>();
     return (...args) => selector(...args).map(arg => {
