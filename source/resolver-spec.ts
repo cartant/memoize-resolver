@@ -93,4 +93,10 @@ describe("createResolver", () => {
         expect(resolver(c, f)).to.equal(resolver(d, f));
         expect(resolver(c, f)).to.not.equal(resolver(e, f));
     });
+
+    it("should not be able to fake resolved keys", () => {
+        const resolver = createResolver();
+        const key = resolver({});
+        expect(key).to.not.equal(resolver(key));
+    });
 });
