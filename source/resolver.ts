@@ -6,16 +6,16 @@
 export function createResolver<Args extends any[]>(
     selector: (...args: Args) => unknown[] = (...args) => args
 ): (...args: Args) => string {
-    let lastId = 0;
-    const map = new WeakMap<object, number>();
+    let counter = 0;
+    const map = new WeakMap<object, string>();
     return (...args) => selector(...args).map(arg => {
         if (arg && /^(function|object)$/.test(typeof arg)) {
-            let argId = map.get(arg as object);
-            if (!argId) {
-                argId = ++lastId;
-                map.set(arg as object, argId);
+            let key = map.get(arg as object);
+            if (!key) {
+                key = `@${++counter}`;
+                map.set(arg as object, key);
             }
-            return `@${argId}`;
+            return key;
         }
         return JSON.stringify(arg);
     }).join(",");
