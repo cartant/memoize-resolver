@@ -2,7 +2,7 @@
 
 ## What is it?
 
-`memoize-resolver` is a general purpose key resolver for use with a `memoize` implementation like the one in [Lodash](https://lodash.com/docs/#memoize).
+`memoize-resolver` is a general-purpose key resolver for use with a `memoize` implementation like the one in [Lodash](https://lodash.com/docs/#memoize).
 
 ## Why might you need it?
 
