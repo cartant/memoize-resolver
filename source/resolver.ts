@@ -6,7 +6,7 @@
 export function createResolver<Args extends any[]>(
   selector: (...args: Args) => unknown[] = (...args) => args
 ): (...args: Args) => string {
-  let counter = 0;
+  let count = 0;
   const map = new WeakMap<object, string>();
   return (...args) =>
     selector(...args)
@@ -14,7 +14,7 @@ export function createResolver<Args extends any[]>(
         if (arg && /^(function|object)$/.test(typeof arg)) {
           let key = map.get(arg as object);
           if (!key) {
-            key = `@${++counter}`;
+            key = `@${++count}`;
             map.set(arg as object, key);
           }
           return key;
