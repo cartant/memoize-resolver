@@ -10,7 +10,7 @@ export function createResolver<Args extends any[]>(
   const map = new WeakMap<object, string>();
   return (...args) =>
     selector(...args)
-      .map(arg => {
+      .map((arg) => {
         if (arg && /^(function|object)$/.test(typeof arg)) {
           let key = map.get(arg as object);
           if (!key) {
